@@ -1,0 +1,11 @@
+# The DELIBERATELY BROKEN image. Identical code; it starts, stays alive, and never becomes
+# ready. This is what you deploy on purpose to prove the rollout halts.
+FROM python:3.12-slim
+
+COPY app/ /srv/app/
+WORKDIR /srv
+
+ENV WARMUP_SECONDS=3
+ENV BREAK_READINESS=1
+EXPOSE 8080
+CMD ["python3", "app/server.py"]
